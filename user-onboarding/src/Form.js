@@ -61,7 +61,7 @@ export default function Form (props) {
                     <input
                         type='checkbox'
                         name='tos'
-                        value={formValues.tos}
+                        checked={formValues.tos}
                         onChange={onChange}
                     />
                 </label><br/>

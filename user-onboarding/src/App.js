@@ -59,7 +59,6 @@ function App() { // ==========================
   }
 
   const postNewUser = (newUser) => {
-    console.log('POST NEW USER: ');
     axios.post('https://reqres.in/api/users', newUser)
       .then(response => {
           setUsers([response.data, ...users]);
