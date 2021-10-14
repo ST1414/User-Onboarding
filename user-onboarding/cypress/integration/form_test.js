@@ -14,6 +14,7 @@ describe('[ FORM APP TESTING ]', () => {
     const tos = () => cy.get('input[name=tos]');
     const submitBtn = () => cy.get(`button[id='submitBtn']`); // Can you use Type?
 
+
     describe('1. Validate input fields are visible', () => {
         // Check that elements exist and references above work
         it('Validate the proper elements are showing', () => {
@@ -25,6 +26,7 @@ describe('[ FORM APP TESTING ]', () => {
             submitBtn().should('exist');
         })
     })
+
 
     describe ('2. Validate input fields are empty and accept values', () => {
         // Get the Name input and type a name in it.
@@ -54,29 +56,71 @@ describe('[ FORM APP TESTING ]', () => {
                 .check()
                 .should('be.checked')
         })
-    })
+    }) // End test case 4
     
 
-    // 3. Check to see if a user can submit the form data
     describe ('3. Validate user can submit the completed form data', () => {
-        it('Submit button is enabled after all fields are completed', () => {
+        
+        it('Use information is posted to the DOM after submit', () => {
+            
+            // Enter values in all fields + submit
             fName().type('Sean')
             lName().type('Terry')
             email().type('st@email.com')
             pwd().type('12345')
-            
+            tos().check()
+            submitBtn().click();
 
+            // Entry is contained in DOM
+            cy.contains(/Sean Terry/i)
+ 
         })
+    }) // End test case 3
 
-    })
-
-
-    // 4. Check for form validation if an input is left empty
-
-        // it('submit button starts out disabled', () => {
-        //     submitBtn().should('be.disabled');
-        // })
     
-
+    //Check for form validation if an input is left empty
+    describe ('4. Validate that submit button is disabled', () => {
+        
+        it('First name field missing', () => {
+            // fName().type('Sean')
+            lName().type('Terry')
+            email().type('st@email.com')
+            pwd().type('12345')
+            tos().check()
+            submitBtn().should('be.disabled');
+        })
+        it('Last name field missing', () => {
+            fName().type('Sean')
+            // lName().type('Terry')
+            email().type('st@email.com')
+            pwd().type('12345')
+            tos().check()
+            submitBtn().should('be.disabled');
+        })
+        it('Email field missing', () => {
+            fName().type('Sean')
+            lName().type('Terry')
+            // email().type('st@email.com')
+            pwd().type('12345')
+            tos().check()
+            submitBtn().should('be.disabled');
+        })
+        it('Password field missing', () => {
+            fName().type('Sean')
+            lName().type('Terry')
+            email().type('st@email.com')
+            // pwd().type('12345')
+            tos().check()
+            submitBtn().should('be.disabled');
+        })
+        it('TOS not checked', () => {
+            fName().type('Sean')
+            lName().type('Terry')
+            email().type('st@email.com')
+            pwd().type('12345')
+            // tos().check()
+            submitBtn().should('be.disabled');
+        })
+    }) // End test case 4
 
 }) // End of Form App Testing
