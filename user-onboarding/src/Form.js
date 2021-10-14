@@ -61,12 +61,12 @@ export default function Form (props) {
                     <input
                         type='checkbox'
                         name='tos'
-                        checked={formValues.tos}
+                        checked={formValues.tos} // <<< Checkboxes us 'checked' not 'value'
                         onChange={onChange}
                     />
                 </label><br/>
                 {/* Button - Set disabled */}
-                <button disabled={formDisabled}>Submit New User</button> 
+                <button id='submitBtn' disabled={formDisabled}>Submit New User</button> 
                 <div className='errors'>
                     <div>{formErrors.firstName}</div>
                     <div>{formErrors.lastName}</div>

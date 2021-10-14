@@ -36,7 +36,6 @@ function App() { // ==========================
 
   // ----- Helper Functions -----
   const getUsers = () => {
-    console.log('GET USER: ');
     axios.get('https://reqres.in/api/users')
     .then (response => {
       setUsers(response.data.data)
@@ -102,8 +101,15 @@ function App() { // ==========================
         formSubmit={formSubmit}
         formErrors={formErrors}
       />
+      {
+        users.map(user => {
+          console.log('USER: ', user)
+          return <p>{user.first_name} {user.last_name}</p>
+        })
+      }
     </div>
   );
 }
 
 export default App;
+
